@@ -31,15 +31,16 @@ class PlanetaryGrid():
                 self.tiles[y].append(tile)
 
 
-    def findNeighbours(self, x, y):
+    def getNeighbours(self, x, y):
         n = [-1, 0, 1]
         neighbors = []
-        for y in range(3):
-            for x in range(3):
-                try:
-                    neighbours.append(self.tiles[x+n[j]][y+n[i]])
-                except:
-                    pass
+        for i in range(3):
+            for j in range(3):
+                if (self.tiles[x+n[i]][y+n[j]] != self.tiles[x][y]):
+                    try:
+                        neighbors.append(self.tiles[x+n[i]][y+n[j]])
+                    except:
+                        continue
         return neighbors
 
 
@@ -51,8 +52,8 @@ def printGrid(grid, book):
                     
     return sheet
 
+
 book = xlsxwriter.Workbook("out.xlsx")
 e = PlanetaryGrid(8,8,4)
 sheet = printGrid(e, book)
 book.close()
-print(e.findNeighbours(3,3))
