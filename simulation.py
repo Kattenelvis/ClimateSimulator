@@ -1,5 +1,5 @@
 import xlsxwriter
-import math
+from math import sin, pi
 
 class gridTile():
     def __init__(self, x, y, z, temperature):
@@ -24,11 +24,18 @@ class PlanetaryGrid():
 
 
     def __generateGrid(self):
+        #Generates the grid
         for y in range(self.size[1]):
             self.tiles.append([])
             for x in range(self.size[0]):
-                tile = gridTile(x,y,0,15.0)#math.cos(y)) Gona use sine waves to represent the polar regions vs the equator
+                temperature = 15.0+sin(y-pi*0.9)
+                tile = gridTile(x,y,0, temperature)
                 self.tiles[y].append(tile)
+
+        #The neighbors need to be scanned after the grid is done
+        for y in range(self.size[1]):
+            for x in range(self.size[0]):
+                self.tiles[x][y].neighbours = self.getNeighbours(x,y)
 
 
     def getNeighbours(self, x, y):
@@ -36,12 +43,22 @@ class PlanetaryGrid():
         neighbors = []
         for i in range(3):
             for j in range(3):
-                if (self.tiles[x+n[i]][y+n[j]] != self.tiles[x][y]):
-                    try:
+                try:
+                    if (self.tiles[x+n[i]][y+n[j]] != self.tiles[x][y]):
                         neighbors.append(self.tiles[x+n[i]][y+n[j]])
-                    except:
-                        continue
+                except:
+                    continue
         return neighbors
+
+
+    def avgTemperature(self, x, y):
+        tile = self.tiles[x][y]
+        tile.neighbours
+
+
+    def timeStep(self, dt):
+        pass
+
 
 
 def printGrid(grid, book):
@@ -53,7 +70,15 @@ def printGrid(grid, book):
     return sheet
 
 
-book = xlsxwriter.Workbook("out.xlsx")
+def timeStep(book):
+    sheet = printGrid(e, book)
+    return sheet
+
+
+
 e = PlanetaryGrid(8,8,4)
-sheet = printGrid(e, book)
+book = xlsxwriter.Workbook("out.xlsx")
+timeStep(book)
+timeStep(book)
+timeStep(book)
 book.close()
