@@ -28,7 +28,7 @@ class PlanetaryGrid():
         for y in range(self.size[1]):
             self.tiles.append([])
             for x in range(self.size[0]):
-                temperature = 15.0+sin(y-pi*0.9)
+                temperature = 15.0+5*sin(y-pi*0.9)
                 tile = gridTile(x,y,0, temperature)
                 self.tiles[y].append(tile)
 
