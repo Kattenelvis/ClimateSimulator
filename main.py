@@ -2,11 +2,14 @@ import xlsxwriter
 from simulation import PlanetaryGrid
 from excel import printGrid
 
-e = PlanetaryGrid(40,40,4)
+grid = PlanetaryGrid(40,40,4)
 book = xlsxwriter.Workbook("out.xlsx")
-for _ in range(10):
-    printGrid(e, book)
-    e.tiles = e.timeStep()
+
+#Runs the simulation for b time ticks
+b = 10
+for _ in range(b):
+    printGrid(book, grid)
+    grid.tiles = grid.timeStep()
 
 
 book.close()
