@@ -27,6 +27,7 @@ class PlanetaryGrid():
         for y in range(self.size[1]):
             self.tiles.append([])
             for x in range(self.size[0]):
+                #The equation can be visualized here:
                 # https://www.desmos.com/calculator/ogjhneip7o
                 q = self.size[0]/2
                 a = 20

@@ -11,5 +11,4 @@ for _ in range(b):
     printGrid(book, grid)
     grid.tiles = grid.timeStep()
 
-
 book.close()
