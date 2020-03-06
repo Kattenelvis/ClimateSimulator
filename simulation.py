@@ -1,5 +1,4 @@
-import xlsxwriter
-from math import sin, pi
+from math import cos, pi
 
 class gridTile():
     def __init__(self, x, y, z, temperature):
@@ -28,7 +27,11 @@ class PlanetaryGrid():
         for y in range(self.size[1]):
             self.tiles.append([])
             for x in range(self.size[0]):
-                temperature = 15.0+5*sin(y-pi*0.9)
+                # https://www.desmos.com/calculator/ogjhneip7o
+                q = self.size[0]/2
+                a = 20
+                b = 5
+                temperature = b + a * cos(y*pi/q + pi) 
                 tile = gridTile(x,y,0, temperature)
                 self.tiles[y].append(tile)
 
@@ -51,34 +54,23 @@ class PlanetaryGrid():
         return neighbors
 
 
-    def avgTemperature(self, x, y):
+    def avgNeighbourTemp(self, x, y):
         tile = self.tiles[x][y]
-        tile.neighbours
+        _sum = 0
+        #Take the average temperature of sourrunding tiles and give that temperature to the tile
+        for i in range(len(tile.neighbours)):
+            _sum += tile.neighbours[i].temperature
+
+        avg = _sum/len(tile.neighbours)
+        return avg
 
 
-    def timeStep(self, dt):
-        pass
+    def timeStep(self):
+        newTiles = self.tiles
+        for y in range((self.size[1])):
+            for x in range((self.size[0])):
+                pass
+                #Basic Thermodynamics
+                newTiles[x][y].temperature = self.avgNeighbourTemp(x,y)
 
-
-
-def printGrid(grid, book):
-    sheet = book.add_worksheet()
-    for x in range(grid.size[0]-1):
-        for y in range(grid.size[1]-1):
-            sheet.write(x,y,grid.tiles[x+1][y+1].temperature)  
-                    
-    return sheet
-
-
-def timeStep(book):
-    sheet = printGrid(e, book)
-    return sheet
-
-
-
-e = PlanetaryGrid(8,8,4)
-book = xlsxwriter.Workbook("out.xlsx")
-timeStep(book)
-timeStep(book)
-timeStep(book)
-book.close()
+        return newTiles
