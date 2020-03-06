@@ -30,7 +30,7 @@ class PlanetaryGrid():
                 #The equation can be visualized here:
                 # https://www.desmos.com/calculator/ogjhneip7o
                 q = self.size[0]/2
-                a = 20
+                a = 25
                 b = 5
                 temperature = b + a * cos(y*pi/q + pi) 
                 tile = gridTile(x,y,0, temperature)

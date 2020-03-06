@@ -7,10 +7,12 @@ def printGrid(book, grid):
         for y in range(grid.size[1]-1):
             temperature = grid.tiles[x+1][y+1].temperature
 
-           
-            red = (1 / (1 + e**temperature))
-            color = f"#{floor(red)}00000" if red<10 else f"#{floor(red)}0000"
-
+            #Check out the color graph equation here https://www.desmos.com/calculator/vikit8n7zd
+            amplitude = 99
+            smoothFunction = 20
+            red = amplitude / (1 + e**(-temperature/smoothFunction))
+            blue = amplitude / (1 + e**(temperature/smoothFunction))
+            color = f"#{floor(red)}00{floor(blue)}"# if red<10 else f"#{floor(red)}00{floor(blue)}"
             
             format1 = book.add_format({'bg_color':color, 'font_color':'white'})
             sheet.write(x,y,temperature, format1)
