@@ -9,9 +9,10 @@ def printGrid(book, grid):
 
            
             red = (1 / (1 + e**temperature))
+            color = f"#{floor(red)}00000" if red<10 else f"#{floor(red)}0000"
 
-            print(f"#{floor(red)}0000")
-            format1 = book.add_format({'bg_color':f"#{floor(red)}0000", 'font_color':'white'})
+            
+            format1 = book.add_format({'bg_color':color, 'font_color':'white'})
             sheet.write(x,y,temperature, format1)
         
     return sheet
