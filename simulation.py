@@ -12,9 +12,12 @@ class gridTile():
 
 
 class PlanetaryGrid():
-    def __init__(self, x, y, z):
+    def __init__(self, x, y, z, tempAmplitude, baseTemp):
         self.size = (x,y,z)
         self.tiles = []
+        self.tempAmplitude = tempAmplitude
+        self.baseTemp = baseTemp
+        self.coolingAmplitude = 5
         self.__generateGrid()
 
 
@@ -29,10 +32,8 @@ class PlanetaryGrid():
             for x in range(self.size[0]):
                 #The equation can be visualized here:
                 # https://www.desmos.com/calculator/ogjhneip7o
-                q = self.size[0]/2
-                a = 25
-                b = 5
-                temperature = b + a * cos(y*pi/q + pi) 
+                equator = self.size[0]/2
+                temperature = self.baseTemp + self.tempAmplitude * cos(y*pi/equator + pi)
                 tile = gridTile(x,y,0, temperature)
                 self.tiles[y].append(tile)
 
@@ -72,6 +73,6 @@ class PlanetaryGrid():
             for x in range((self.size[0])):
                 pass
                 #Basic Thermodynamics
-                newTiles[x][y].temperature = self.avgNeighbourTemp(x,y)
+                newTiles[x][y].temperature = self.avgNeighbourTemp(x,y) - self.coolingAmplitude
 
         return newTiles
