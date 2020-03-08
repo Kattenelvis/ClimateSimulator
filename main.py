@@ -6,7 +6,7 @@ grid = PlanetaryGrid(40,40,4)
 book = xlsxwriter.Workbook("out.xlsx")
 
 #Runs the simulation for b time ticks
-b = 10
+b = 200
 for _ in range(b):
     printGrid(book, grid)
     grid.tiles = grid.timeStep()
