@@ -8,3 +8,4 @@ class GridTile():
     def __repr__(self):
         return "grid tile with position x="+str(self.position[0])+" y="+str(self.position[1])+" and temperature="+str(self.temperature)+"C"
 
+

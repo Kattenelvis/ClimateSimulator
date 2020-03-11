@@ -10,6 +10,7 @@ class PlanetaryGrid():
         self.baseTemp = baseTemp
         self.coolingAmplitude = 5
         self.__generateGrid()
+        self.deltaT = 30 #minutes
 
 
     def __repr__(self):
@@ -59,11 +60,12 @@ class PlanetaryGrid():
 
 
     def timeStep(self):
+        from maths import TempConverters
         newTiles = self.tiles
         for y in range((self.size[1])):
             for x in range((self.size[0])):
-                pass
                 #Basic Thermodynamics
                 newTiles[x][y].temperature = self.avgNeighbourTemp(x,y) - self.coolingAmplitude
+                # newTiles[x][y].temperature = TempConverters.KelvinToCelsius(TempConverters.CelsiusToKelvin(self.avgNeighbourTemp(x,y)) - TempConverters.CelsiusToKelvin(self.coolingAmplitude))
 
         return newTiles
