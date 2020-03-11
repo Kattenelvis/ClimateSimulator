@@ -1,17 +1,8 @@
 from math import cos, pi
-
-class gridTile():
-    def __init__(self, x, y, z, temperature):
-        self.position = (x,y,z) #Position Tuple
-        self.temperature = temperature #Average grid tile temperature
-        self.neighbours = []
-
-
-    def __repr__(self):
-        return "grid tile with position x="+str(self.position[0])+" y="+str(self.position[1])+" and temperature="+str(self.temperature)+"C"
-
+from simulation.GridTile import GridTile
 
 class PlanetaryGrid():
+    
     def __init__(self, x=20, y=20, z=10, tempAmplitude=30, baseTemp=5):
         self.size = (x,y,z)
         self.tiles = []
@@ -34,7 +25,7 @@ class PlanetaryGrid():
                 # https://www.desmos.com/calculator/ogjhneip7o
                 equator = self.size[0]/2
                 temperature = self.baseTemp + self.tempAmplitude * cos(y*pi/equator + pi)
-                tile = gridTile(x,y,0, temperature)
+                tile = GridTile(x,y,0, temperature)
                 self.tiles[y].append(tile)
 
         #The neighbors need to be scanned after the grid is done
