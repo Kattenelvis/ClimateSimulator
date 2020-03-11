@@ -12,7 +12,7 @@ class gridTile():
 
 
 class PlanetaryGrid():
-    def __init__(self, x, y, z, tempAmplitude, baseTemp):
+    def __init__(self, x=20, y=20, z=10, tempAmplitude=30, baseTemp=5):
         self.size = (x,y,z)
         self.tiles = []
         self.tempAmplitude = tempAmplitude
