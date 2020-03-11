@@ -1,5 +1,5 @@
 import xlsxwriter
-from simulation import PlanetaryGrid
+from simulation.PlanetaryGrid import PlanetaryGrid
 from excel import printGrid
 
 grid = PlanetaryGrid(x=25,y=25,z=4,tempAmplitude=22.0,baseTemp=3.0)
