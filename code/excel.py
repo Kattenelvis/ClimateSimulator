@@ -20,5 +20,13 @@ def printGrid(book, grid):
     return sheet
 
 
-def tempColor(book, temp):
-    pass
+def outputFileManagment():
+    from os import getcwd, mkdir, rmdir, path, remove
+    from shutil import move
+
+    if not path.exists(getcwd()+"/output"):
+        mkdir(getcwd()+"/output")
+
+    if path.exists(getcwd()+"/output/out.xlsx"):
+        remove(getcwd()+"/output/out.xlsx")
+    move(getcwd()+"/out.xlsx", getcwd()+"/output")
